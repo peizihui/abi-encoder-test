@@ -14,6 +14,7 @@ public class CallBackUtils {
 	public static void txDecodeInCallBack(TransactionDecoder decode, TransactionReceipt receipt) throws BaseException, TransactionException, IOException {
 		
 		if(openCallBack) {
+			System.out.println(" receipt => " + receipt);
 			System.out.println(" input json => ");
 			System.out.println("\t " + decode.decodeInputReturnJson(receipt.getInput()));
 			System.out.println(" input object => ");
