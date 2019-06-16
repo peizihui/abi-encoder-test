@@ -5,14 +5,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.fisco.bcos.abi.encoder.contract.EchoArrayArray.EventBSEventResponse;
 import org.fisco.bcos.abi.encoder.contract.EchoArrayArray;
-import org.fisco.bcos.abi.encoder.contract.EchoArrayArray.EchoEventBSEventResponse;
 import org.fisco.bcos.abi.encoder.contract.EchoArrayArray.EventAddrEventResponse;
 import org.fisco.bcos.abi.encoder.contract.EchoArrayArray.EventB32EventResponse;
 import org.fisco.bcos.abi.encoder.contract.EchoArrayArray.EventBoolEventResponse;
@@ -261,7 +260,7 @@ public class ArrayArrayClient {
 					new StaticGasProvider(gasPrice, gasLimit));
 			TransactionReceipt receipt = arrayObj.setBS(_b).send();
 
-			List<EchoEventBSEventResponse> response = arrayObj.getEchoEventBSEvents(receipt);
+			List<EventBSEventResponse> response = arrayObj.getEventBSEvents(receipt);
 			if (!response.isEmpty()) {
 
 				List result = arrayObj.getBS().send();

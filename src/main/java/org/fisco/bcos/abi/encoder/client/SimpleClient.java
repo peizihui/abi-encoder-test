@@ -9,6 +9,7 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.fisco.bcos.abi.encoder.callback.EchoSimpleCallBack;
 import org.fisco.bcos.abi.encoder.contract.EchoSimple;
 import org.fisco.bcos.abi.encoder.contract.EchoSimple.EventAddrEventResponse;
 import org.fisco.bcos.abi.encoder.contract.EchoSimple.EventB32EventResponse;
@@ -41,6 +42,8 @@ public class SimpleClient {
 	private Credentials credentials;
 	
 	private static final String contractAddresskey = "simple";
+	
+	private EchoSimpleCallBack callBack = new EchoSimpleCallBack();
 
 	public Web3j getWeb3j() {
 		return web3j;
@@ -123,7 +126,7 @@ public class SimpleClient {
 			EchoSimple simple = EchoSimple.load(loadAddr(), web3j, credentials,
 					new StaticGasProvider(gasPrice, gasLimit));
 			TransactionReceipt receipt = simple.setUint(_u).send();
-
+			callBack.onResponse(receipt);
 			List<EventUintEventResponse> response = simple.getEventUintEvents(receipt);
 			if (!response.isEmpty()) {
 
@@ -146,7 +149,7 @@ public class SimpleClient {
 			EchoSimple simple = EchoSimple.load(loadAddr(), web3j, credentials,
 					new StaticGasProvider(gasPrice, gasLimit));
 			TransactionReceipt receipt = simple.setInt(_i).send();
-
+			callBack.onResponse(receipt);
 			List<EventIntEventResponse> response = simple.getEventIntEvents(receipt);
 			if (!response.isEmpty()) {
 
@@ -169,7 +172,7 @@ public class SimpleClient {
 			EchoSimple simple = EchoSimple.load(loadAddr(), web3j, credentials,
 					new StaticGasProvider(gasPrice, gasLimit));
 			TransactionReceipt receipt = simple.setBool(_b).send();
-
+			callBack.onResponse(receipt);
 			List<EventBoolEventResponse> response = simple.getEventBoolEvents(receipt);
 			if (!response.isEmpty()) {
 
@@ -195,7 +198,7 @@ public class SimpleClient {
 			EchoSimple simple = EchoSimple.load(loadAddr(), web3j, credentials,
 					new StaticGasProvider(gasPrice, gasLimit));
 			TransactionReceipt receipt = simple.setAddr(_addr).send();
-
+			callBack.onResponse(receipt);
 			List<EventAddrEventResponse> response = simple.getEventAddrEvents(receipt);
 			if (!response.isEmpty()) {
 
@@ -218,7 +221,7 @@ public class SimpleClient {
 			EchoSimple simple = EchoSimple.load(loadAddr(), web3j, credentials,
 					new StaticGasProvider(gasPrice, gasLimit));
 			TransactionReceipt receipt = simple.setBS32(_b).send();
-
+			callBack.onResponse(receipt);
 			List<EventB32EventResponse> response = simple.getEventB32Events(receipt);
 			if (!response.isEmpty()) {
 
@@ -241,7 +244,7 @@ public class SimpleClient {
 			EchoSimple simple = EchoSimple.load(loadAddr(), web3j, credentials,
 					new StaticGasProvider(gasPrice, gasLimit));
 			TransactionReceipt receipt = simple.setString(s).send();
-
+			callBack.onResponse(receipt);
 			List<EventStringEventResponse> response = simple.getEventStringEvents(receipt);
 			if (!response.isEmpty()) {
 
@@ -264,7 +267,7 @@ public class SimpleClient {
 			EchoSimple simple = EchoSimple.load(loadAddr(), web3j, credentials,
 					new StaticGasProvider(gasPrice, gasLimit));
 			TransactionReceipt receipt = simple.setBS(_b).send();
-
+			callBack.onResponse(receipt);
 			List<EventBSEventResponse> response = simple.getEventBSEvents(receipt);
 			if (!response.isEmpty()) {
 
@@ -287,7 +290,7 @@ public class SimpleClient {
 			EchoSimple simple = EchoSimple.load(loadAddr(), web3j, credentials,
 					new StaticGasProvider(gasPrice, gasLimit));
 			TransactionReceipt receipt = simple.set(_u, _i, _b, _addr, _bs32, _s, _bs).send();
-
+			callBack.onResponse(receipt);
 			List<EventEventResponse> response = simple.getEventEvents(receipt);
 			if (!response.isEmpty()) {
 
