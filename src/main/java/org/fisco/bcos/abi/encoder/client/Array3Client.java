@@ -466,7 +466,7 @@ public class Array3Client {
 			Usage();
 		}
 	
-		ArrayClient client = new ArrayClient();
+		Array3Client client = new Array3Client();
 		client.initialize();
 
 		switch (args[0]) {
