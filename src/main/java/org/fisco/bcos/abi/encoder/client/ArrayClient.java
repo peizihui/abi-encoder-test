@@ -230,19 +230,19 @@ public class ArrayClient {
 	
 
 	
-	public static List<String> toStringListBytes1(List<DynamicBytes> byteList) {
+	public static List<String> toStringListBytes1(List<byte[]> byteList) {
 		List<String> result = new ArrayList<String>();
 		for(int i = 0;i<byteList.size();i++) {
-			result.add(new String(byteList.get(i).getValue()));
+			result.add(new String(byteList.get(i)));
 		}
 		
 		return result;
 	}
 	
-	public static List<String> toStringListByte32(List<Bytes32> byteList) {
+	public static List<String> toStringListByte32(List<byte[]> byteList) {
 		List<String> result = new ArrayList<String>();
 		for(int i = 0;i<byteList.size();i++) {
-			result.add(new String(byteList.get(i).getValue()));
+			result.add(new String(byteList.get(i)));
 		}
 		
 		return result;
