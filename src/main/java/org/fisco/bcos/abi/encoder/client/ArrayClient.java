@@ -262,7 +262,7 @@ public class ArrayClient {
 
 				System.out.printf(
 						" [ EchoArray ][ setBS32 ] success => getBS32 result : %s \n",
-						result);
+						toStringListByte32(result));
 
 			} else {
 				System.out.printf(" [ EchoArray ][ setBS32 ] event empty. \n");
@@ -308,7 +308,7 @@ public class ArrayClient {
 				
 				System.out.printf(
 						" [ EchoArray ][ setBS ] success => getString result : %s \n",
-						result);
+						toStringListBytes1(result));
 			} else {
 				System.out.printf(" [ EchoArray ][ setBS ] event empty. \n");
 			}
