@@ -44,8 +44,6 @@ public class ArrayArrayClient {
 	private Web3j web3j;
 
 	private Credentials credentials;
-	
-	private EchoArrayArrayCallBack callBack = new EchoArrayArrayCallBack();
 
 	public Web3j getWeb3j() {
 		return web3j;
@@ -160,7 +158,6 @@ public class ArrayArrayClient {
 			TransactionReceipt receipt = arrayObj.setUint(_u).send();
 
 			List<EventUintEventResponse> response = arrayObj.getEventUintEvents(receipt);
-			callBack.onResponse(receipt);
 			if (!response.isEmpty()) {
 
 				List result = arrayObj.getUint().send();
@@ -184,7 +181,6 @@ public class ArrayArrayClient {
 			TransactionReceipt receipt = arrayObj.setInt(_i).send();
 
 			List<EventIntEventResponse> response = arrayObj.getEventIntEvents(receipt);
-			callBack.onResponse(receipt);
 			if (!response.isEmpty()) {
 
 				List result = arrayObj.getInt().send();
@@ -208,7 +204,6 @@ public class ArrayArrayClient {
 			TransactionReceipt receipt = arrayObj.setBool(_b).send();
 
 			List<EventBoolEventResponse> response = arrayObj.getEventBoolEvents(receipt);
-			callBack.onResponse(receipt);
 			if (!response.isEmpty()) {
 
 				List result = arrayObj.getBool().send();
@@ -230,7 +225,6 @@ public class ArrayArrayClient {
 			EchoArrayArray arrayObj = EchoArrayArray.load(loadAddr(), web3j, credentials,
 					new StaticGasProvider(gasPrice, gasLimit));
 			TransactionReceipt receipt = arrayObj.setAddr(_addr).send();
-			callBack.onResponse(receipt);
 			List<EventAddrEventResponse> response = arrayObj.getEventAddrEvents(receipt);
 			if (!response.isEmpty()) {
 
@@ -253,7 +247,6 @@ public class ArrayArrayClient {
 			EchoArrayArray arrayObj = EchoArrayArray.load(loadAddr(), web3j, credentials,
 					new StaticGasProvider(gasPrice, gasLimit));
 			TransactionReceipt receipt = arrayObj.setBS32(_b).send();
-			callBack.onResponse(receipt);
 			List<EventB32EventResponse> response = arrayObj.getEventB32Events(receipt);
 			if (!response.isEmpty()) {
 
@@ -276,7 +269,6 @@ public class ArrayArrayClient {
 			EchoArrayArray simple = EchoArrayArray.load(loadAddr(), web3j, credentials,
 					new StaticGasProvider(gasPrice, gasLimit));
 			TransactionReceipt receipt = simple.setString(s).send();
-			callBack.onResponse(receipt);
 			List<EventStringEventResponse> response = simple.getEventStringEvents(receipt);
 			if (!response.isEmpty()) {
 
@@ -299,7 +291,6 @@ public class ArrayArrayClient {
 			EchoArrayArray arrayObj = EchoArrayArray.load(loadAddr(), web3j, credentials,
 					new StaticGasProvider(gasPrice, gasLimit));
 			TransactionReceipt receipt = arrayObj.setBS(_b).send();
-			callBack.onResponse(receipt);
 			List<EventBSEventResponse> response = arrayObj.getEventBSEvents(receipt);
 			if (!response.isEmpty()) {
 
@@ -322,7 +313,6 @@ public class ArrayArrayClient {
 			EchoArrayArray simple = EchoArrayArray.load(loadAddr(), web3j, credentials,
 					new StaticGasProvider(gasPrice, gasLimit));
 			TransactionReceipt receipt = simple.set(_u, _i, _b, _addr, _bs32, _s, _bs).send();
-			callBack.onResponse(receipt);
 			List<EventEventResponse> response = simple.getEventEvents(receipt);
 			if (!response.isEmpty()) {
 
