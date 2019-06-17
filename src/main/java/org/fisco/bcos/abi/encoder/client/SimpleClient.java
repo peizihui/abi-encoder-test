@@ -297,11 +297,12 @@ public class SimpleClient {
 			if (!response.isEmpty()) {
 
 				Tuple7<BigInteger, BigInteger, Boolean, String, byte[], String, byte[]> result = simple.get().send();
-
+				Tuple7<BigInteger, BigInteger, Boolean, String, String, String, String> result0 = new Tuple7<BigInteger, BigInteger, Boolean, String, String, String, String>(response.get(0)._u, response.get(0)._i, response.get(0)._b, response.get(0)._addr, new String(response.get(0)._bs32), response.get(0)._s,   new String(response.get(0)._bs));
+				Tuple7<BigInteger, BigInteger, Boolean, String, String, String, String> result1 = new Tuple7<BigInteger, BigInteger, Boolean, String, String, String, String>(result.getValue1(), result.getValue2(), result.getValue3(), result.getValue4(), new String(result.getValue5()), result.getValue6(), new String(result.getValue7()));
 				System.out.printf(
 						" [ EchoSimple ][ set ] success => event : %s , getString result : %s \n",
-						response.get(0).toString(),
-						result.toString());
+						result0.toString(),
+						result1.toString());
 
 			} else {
 				System.out.printf(" [ EchoSimple ][ set ] event empty. \n");
