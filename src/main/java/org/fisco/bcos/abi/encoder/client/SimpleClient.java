@@ -140,6 +140,7 @@ public class SimpleClient {
 				System.out.printf(" [ EchoSimple ][ setUinit ] event empty. \n");
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.printf(" [ EchoSimple ][ setUinit ] failed, error message is %s\n", e.getMessage());
 		}
 	}
@@ -163,6 +164,7 @@ public class SimpleClient {
 				System.out.printf(" [ EchoSimple ][ setInit ] event empty. \n");
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.printf(" [ EchoSimple ][ setInit ] failed, error message is %s\n", e.getMessage());
 		}
 	}

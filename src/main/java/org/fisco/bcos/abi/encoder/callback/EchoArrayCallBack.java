@@ -11,11 +11,6 @@ public class EchoArrayCallBack extends TransactionSucCallback {
 	@Override
 	public void onResponse(TransactionReceipt response) {
 		TransactionDecoder decode = TransactionDecoderFactory.buildTransactionDecoder(EchoArray.ABI, "");
-		
-		try {
-			CallBackUtils.txDecodeInCallBack(decode, response);
-		} catch (Exception e) {
-			System.out.println(" EchoArrayCallBack transaction call faild, exception => " + e.getMessage());
-		}
+		CallBackUtils.txDecodeInCallBack(decode, response);
 	}
 }

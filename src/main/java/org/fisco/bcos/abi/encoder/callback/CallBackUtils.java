@@ -24,6 +24,7 @@ public class CallBackUtils {
 	public static void txDecodeInCallBack(TransactionDecoder decode, TransactionReceipt receipt) {
 		
 		if(getOpenCallBack()) {
+			
 			// System.out.println(" receipt => " + receipt);
 			
 			try {

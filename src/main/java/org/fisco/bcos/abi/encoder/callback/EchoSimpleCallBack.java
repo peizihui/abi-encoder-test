@@ -11,11 +11,6 @@ public class EchoSimpleCallBack extends TransactionSucCallback {
 	@Override
 	public void onResponse(TransactionReceipt response) {
 		TransactionDecoder decode = TransactionDecoderFactory.buildTransactionDecoder(EchoSimple.ABI, "");
-		
-		try {
-			CallBackUtils.txDecodeInCallBack(decode, response);
-		} catch (Exception e) {
-			System.out.println(" EchoSimpleCallBack transaction call faild, exception => " + e.getMessage());
-		}
+		CallBackUtils.txDecodeInCallBack(decode, response);
 	}
 }
