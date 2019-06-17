@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -128,8 +129,8 @@ public class ArrayArrayClient {
 				List result = arrayObj.getUint().send();
 
 				System.out.printf(
-						" [ EchoArrayArray ][ setUinit ] success => params : %s , event : %s , getUint result : %s \n",
-						_u.toString(), response.get(0).u.toString(), result.toString());
+						" [ EchoArrayArray ][ setUinit ] success => getUint result : %s \n",
+						result);
 
 			} else {
 				System.out.printf(" [ EchoArrayArray ][ setUinit ] event empty. \n");
@@ -151,8 +152,8 @@ public class ArrayArrayClient {
 				List result = arrayObj.getInt().send();
 
 				System.out.printf(
-						" [ EchoArrayArray ][ setInt ] success => params : %s , event : %s , getInt result : %s \n",
-						_i.toString(), response.get(0).i.toString(), result.toString());
+						" [ EchoArrayArray ][ setInt ] success => getInt result : %s \n",
+						result);
 
 			} else {
 				System.out.printf(" [ EchoArrayArray ][ setInit ] event empty. \n");
@@ -174,8 +175,8 @@ public class ArrayArrayClient {
 				List result = arrayObj.getBool().send();
 
 				System.out.printf(
-						" [ EchoArrayArray ][ setBool ] success => params : %s , event : %s , getBool result : %s \n",
-						_b.toString(), response.get(0).b.toString(), result.toString());
+						" [ EchoArrayArray ][ setBool ] success => getBool result : %s \n",
+						result);
 
 			} else {
 				System.out.printf(" [ EchoArrayArray ][ setBool ] event empty. \n");
@@ -197,8 +198,8 @@ public class ArrayArrayClient {
 				List result = arrayObj.getAddr().send();
 
 				System.out.printf(
-						" [ EchoArrayArray ][ setAddr ] success => params : %s , event : %s , getAddr result : %s \n",
-						_addr.toString(), response.get(0).addr.toString(), result.toString());
+						" [ EchoArrayArray ][ setAddr ] success => getAddr result : %s \n",
+						 result);
 
 			} else {
 				System.out.printf(" [ EchoArrayArray ][ setAddr ] event empty. \n");
@@ -220,8 +221,8 @@ public class ArrayArrayClient {
 				List result = arrayObj.getBS32().send();
 
 				System.out.printf(
-						" [ EchoArrayArray ][ setBS32 ] success => params : %s , event : %s , getBS32 result : %s \n",
-						_b.toString(), response.get(0).b.toString(), result.toString());
+						" [ EchoArrayArray ][ setBS32 ] success =>  getBS32 result : %s \n",
+						result.toString());
 
 			} else {
 				System.out.printf(" [ EchoArrayArray ][ setBS32 ] event empty. \n");
@@ -243,8 +244,8 @@ public class ArrayArrayClient {
 				List result = simple.getString().send();
 
 				System.out.printf(
-						" [ EchoArrayArray ][ setString ] success => params : %s , event : %s , getString result : %s \n",
-						s.toString(), response.get(0).s.toString(), result.toString());
+						" [ EchoArrayArray ][ setString ] success => getString result : %s \n",
+					 result);
 
 			} else {
 				System.out.printf(" [ EchoArrayArray ][ setString ] event empty. \n");
@@ -266,8 +267,8 @@ public class ArrayArrayClient {
 				List result = arrayObj.getBS().send();
 
 				System.out.printf(
-						" [ EchoArrayArray ][ setBS ] success => params : %s , event : %s , getString result : %s \n",
-						_b.toString(), response.get(0).b.toString(), result.toString());
+						" [ EchoArrayArray ][ setBS ] success => getString result : %s \n",
+						result.toString());
 
 			} else {
 				System.out.printf(" [ EchoArrayArray ][ setBS ] event empty. \n");
@@ -310,67 +311,59 @@ public class ArrayArrayClient {
 		System.exit(0);
 	}
 	
-	public static List<BigInteger> toBigIntegerList(String[] args) {
-		List<BigInteger> r = new ArrayList<BigInteger>();
-		for (int i = 0; i < args.length; ++i) {
-			r.add(new BigInteger(args[i]));
-		}
-		return r;
-	}
-	
 	public static List<BigInteger> toBigIntegerList(String s) {
 		List<BigInteger> r = new ArrayList<BigInteger>();
-		String[] args = s.split("|");
+		String[] args = s.split("\\|");
 		for (int i = 0; i < args.length; ++i) {
 			r.add(new BigInteger(args[i]));
 		}
 		return r;
 	}
 	
-	public static List<Boolean> toBoolList(String[] args) {
-		List<Boolean> r = new ArrayList<Boolean>();
+	public static List<List<BigInteger>> toBigIntegerList(String[] args) {
+		List<List<BigInteger>> r = new ArrayList<List<BigInteger>>();
 		for (int i = 0; i < args.length; ++i) {
-			r.add(Boolean.parseBoolean(args[i]));
+			r.add(toBigIntegerList(args[i]));
 		}
 		return r;
 	}
 	
 	public static List<Boolean> toBoolList(String s) {
 		List<Boolean> r = new ArrayList<Boolean>();
-		String[] args = s.split("|");
+		String[] args = s.split("\\|");
 		for (int i = 0; i < args.length; ++i) {
 			r.add(Boolean.parseBoolean(args[i]));
 		}
 		return r;
 	}
 	
-	public static List<String> toAddrList(String[] args) {
-		List<String> r = new ArrayList<String>();
+	public static List<List<Boolean>> toBoolList(String[] args) {
+		List<List<Boolean>> r = new ArrayList<List<Boolean>>();
 		for (int i = 0; i < args.length; ++i) {
-			r.add(args[i]);
+			r.add(toBoolList(args[i]));
 		}
 		return r;
 	}
 	
 	public static List<String> toAddrList(String s) {
-		String[] args = s.split("|");
+		String[] args = s.split("\\|");
 		List<String> r = new ArrayList<String>();
 		for (int i = 0; i < args.length; ++i) {
 			r.add(args[i]);
 		}
 		return r;
 	}
-	
-	public static List<String> toStringList(String[] args) {
-		List<String> r = new ArrayList<String>();
+
+	public static List<List<String>> toAddrList(String[] args) {
+		List<List<String>> r = new ArrayList<List<String>>();
 		for (int i = 0; i < args.length; ++i) {
-			r.add(args[i]);
+			r.add(toAddrList(args[i]));
 		}
 		return r;
 	}
 	
 	public static List<String> toStringList(String s) {
-		String[] args = s.split("|");
+		String[] args = s.split("\\|");
 		List<String> r = new ArrayList<String>();
 		for (int i = 0; i < args.length; ++i) {
 			r.add(args[i]);
@@ -378,22 +371,31 @@ public class ArrayArrayClient {
 		return r;
 	}
 	
-	public static List<byte[]> toBSList(String[] args) {
-		List<byte[]> r = new ArrayList<byte[]>();
+	public static List<List<String>> toStringList(String[] args) {
+		List<List<String>> r = new ArrayList<List<String>>();
 		for (int i = 0; i < args.length; ++i) {
-			r.add(args[i].getBytes());
+			r.add(toStringList(args[i]));
 		}
 		return r;
 	}
 	
 	public static List<byte[]> toBSList(String s) {
-		String[] args = s.split("|");
+		String[] args = s.split("\\|");
 		List<byte[]> r = new ArrayList<byte[]>();
 		for (int i = 0; i < args.length; ++i) {
 			r.add(args[i].getBytes());
 		}
 		return r;
 	}
+
+	public static List<List<byte[]>> toBSList(String[] args) {
+		List<List<byte[]>> r = new ArrayList<List<byte[]>>();
+		for (int i = 0; i < args.length; ++i) {
+			r.add(toBSList(args[i]));
+		}
+		return r;
+	}
+
 
 	public static void main(String[] args) throws Exception {
 
@@ -408,7 +410,7 @@ public class ArrayArrayClient {
 		case "deploy":
 			client.deploy();
 			break;
-			/*
+			
 		case "setUint":
 			if (args.length < 2) {
 				Usage();
@@ -455,8 +457,8 @@ public class ArrayArrayClient {
 			if (args.length < 2) {
 				Usage();
 			}
-			client.set(toBigIntegerList(args[1]), toBigIntegerList(args[2]), toBoolList(args[3]), toStringList(args[4]), toBSList(args[5]), toStringList(args[6]), toBSList(args[7]));
-			break;*/
+			// client.set(toBigIntegerList(args[1]), toBigIntegerList(args[2]), toBoolList(args[3]), toStringList(args[4]), toBSList(args[5]), toStringList(args[6]), toBSList(args[7]));
+			break;
 		default: {
 			Usage();
 		}
