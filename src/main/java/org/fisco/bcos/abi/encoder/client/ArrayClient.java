@@ -299,16 +299,20 @@ public class ArrayClient {
 			if (!response.isEmpty()) {
 
 				List result = arrayObj.getBS().send();
+				
+				List<String> r0 = toStringList(response.get(0).b);
+				List<String> r1 = toStringListBytes(result);
 
 				System.out.printf(
 						" [ EchoArray ][ setBS ] success => event : %s , getString result : %s \n",
-						toStringList(response.get(0).b), 
-						toStringListBytes(result));
+						r0, 
+						r1);
 
 			} else {
 				System.out.printf(" [ EchoArray ][ setBS ] event empty. \n");
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.printf(" [ EchoArray ][ setBS ] failed, error message is %s\n", e.getMessage());
 		}
 	}
