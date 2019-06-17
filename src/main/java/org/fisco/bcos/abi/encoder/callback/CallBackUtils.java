@@ -11,7 +11,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 public class CallBackUtils {
 	
-	public static boolean openCallBack = true;
+	public static boolean openCallBack = false;
 	
 	public static void setOpenCallBack(boolean _openCallBack) {
 		openCallBack = _openCallBack;
@@ -25,7 +25,9 @@ public class CallBackUtils {
 		
 		if(getOpenCallBack()) {
 			
-			// System.out.println(" receipt => " + receipt);
+			System.out.println(" receipt input => " + receipt.getInput());
+			System.out.println(" receipt output => " + receipt.getOutput());
+			System.out.println(" receipt logs => " + receipt.getLogs());
 			
 			try {
 				System.out.println(" input json => ");
