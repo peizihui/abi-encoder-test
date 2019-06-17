@@ -299,7 +299,7 @@ public class ArrayClient {
 			if (!response.isEmpty()) {
 
 				List result = arrayObj.getBS().send();
-				
+				System.out.println(response.get(0).b);
 				List<String> r0 = toStringList(response.get(0).b);
 				List<String> r1 = toStringListBytes(result);
 
