@@ -22,6 +22,10 @@ import org.fisco.bcos.abi.encoder.contract.EchoArray.EventStringEventResponse;
 import org.fisco.bcos.abi.encoder.contract.EchoArray.EventUintEventResponse;
 import org.fisco.bcos.channel.client.Service;
 import org.fisco.bcos.web3j.abi.datatypes.Address;
+import org.fisco.bcos.web3j.abi.datatypes.Array;
+import org.fisco.bcos.web3j.abi.datatypes.Bytes;
+import org.fisco.bcos.web3j.abi.datatypes.DynamicArray;
+import org.fisco.bcos.web3j.abi.datatypes.DynamicBytes;
 import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes32;
 import org.fisco.bcos.web3j.crypto.Credentials;
 import org.fisco.bcos.web3j.crypto.Keys;
@@ -134,7 +138,7 @@ public class ArrayClient {
 
 				System.out.printf(
 						" [ EchoArray ][ setUinit ] success => event : %s , getUint result : %s \n",
-						response.get(0).u.toString(), result.toString());
+						response.get(0).u, result);
 
 			} else {
 				System.out.printf(" [ EchoArray ][ setUinit ] event empty. \n");
@@ -157,7 +161,7 @@ public class ArrayClient {
 
 				System.out.printf(
 						" [ EchoArray ][ setInt ] success => event : %s , getInt result : %s \n",
-						response.get(0).i.toString(), result.toString());
+						response.get(0).i, result);
 
 			} else {
 				System.out.printf(" [ EchoArray ][ setInit ] event empty. \n");
@@ -180,7 +184,7 @@ public class ArrayClient {
 
 				System.out.printf(
 						" [ EchoArray ][ setBool ] success => event : %s , getBool result : %s \n",
-						response.get(0)._b.toString(), result.toString());
+						response.get(0)._b, result);
 
 			} else {
 				System.out.printf(" [ EchoArray ][ setBool ] event empty. \n");
@@ -203,7 +207,7 @@ public class ArrayClient {
 
 				System.out.printf(
 						" [ EchoArray ][ setAddr ] success => event : %s , getAddr result : %s \n",
-						response.get(0).addr.toString(), result.toString());
+						response.get(0).addr, result);
 
 			} else {
 				System.out.printf(" [ EchoArray ][ setAddr ] event empty. \n");
@@ -212,6 +216,34 @@ public class ArrayClient {
 			System.out.printf(" [ EchoArray ][ setAddr ] failed, error message is %s\n", e.getMessage());
 		}
 	}
+	
+	public static List<String> toStringList(List<byte[]> byteList) {
+		List<String> result = new ArrayList<String>();
+		for(int i = 0;i<byteList.size();i++) {
+			result.add(new String(byteList.get(i)));
+		}
+		
+		return result;
+	}
+	
+	public static List<String> toStringListBytes(List<DynamicBytes> byteList) {
+		List<String> result = new ArrayList<String>();
+		for(int i = 0;i<byteList.size();i++) {
+			result.add(new String(byteList.get(i).getValue()));
+		}
+		
+		return result;
+	}
+	
+	public static List<String> toStringListByte32(List<Bytes32> byteList) {
+		List<String> result = new ArrayList<String>();
+		for(int i = 0;i<byteList.size();i++) {
+			result.add(new String(byteList.get(i).getValue()));
+		}
+		
+		return result;
+	}
+	
 	
 	public void setBS32(List<byte[]> _b) {
 		try {
@@ -226,7 +258,7 @@ public class ArrayClient {
 
 				System.out.printf(
 						" [ EchoArray ][ setBS32 ] success => event : %s , getBS32 result : %s \n",
-						response.get(0).b.toString(), result.toString());
+						toStringList(response.get(0).b), toStringListByte32(result));
 
 			} else {
 				System.out.printf(" [ EchoArray ][ setBS32 ] event empty. \n");
@@ -249,7 +281,7 @@ public class ArrayClient {
 
 				System.out.printf(
 						" [ EchoArray ][ setString ] success => event : %s , getString result : %s \n",
-						response.get(0).s.toString(), result.toString());
+						response.get(0).s, result);
 
 			} else {
 				System.out.printf(" [ EchoArray ][ setString ] event empty. \n");
@@ -272,7 +304,7 @@ public class ArrayClient {
 
 				System.out.printf(
 						" [ EchoArray ][ setBS ] success => event : %s , getString result : %s \n",
-						response.get(0).b.toString(), result.toString());
+						toStringList(response.get(0).b), toStringListBytes(result));
 
 			} else {
 				System.out.printf(" [ EchoArray ][ setBS ] event empty. \n");
@@ -295,7 +327,7 @@ public class ArrayClient {
 
 				System.out.printf(
 						" [ EchoArray ][ set ] success => event : %s , getString result : %s \n",
-						response.get(0).toString(), result.toString());
+						response.get(0), result);
 
 			} else {
 				System.out.printf(" [ EchoArray ][ set ] event empty. \n");
@@ -477,7 +509,7 @@ public class ArrayClient {
 			if (args.length < 2) {
 				Usage();
 			}
-			client.setAddr(toStringList(Arrays.copyOfRange(args, 1, args.length)));
+			client.setString(toStringList(Arrays.copyOfRange(args, 1, args.length)));
 			break;
 		case "setBS":
 			if (args.length < 2) {
