@@ -287,7 +287,6 @@ public class ArrayArrayClient {
 			if (!response.isEmpty()) {
 
 				Tuple7<List<List<BigInteger>>, List<List<BigInteger>>, List<List<Boolean>>, List<List<String>>, List<List<byte[]>>, List<List<String>>, List<List<byte[]>>> result = simple.get().send();
-
 	
 			} else {
 				System.out.printf(" [ EchoArrayArray ][ set ] event empty. \n");

@@ -256,7 +256,7 @@ public class Array3Client {
 
 				System.out.printf(
 						" [ EchoArray3 ][ setBS32 ] success => getBS32 result : %s \n",
-						result);
+						toStringListBytes1(result));
 
 			} else {
 				System.out.printf(" [ EchoArray3 ][ setBS32 ] event empty. \n");
@@ -302,7 +302,7 @@ public class Array3Client {
 
 				System.out.printf(
 						" [ EchoArray3 ][ setBS ] success =>  getString result : %s \n",
-						result);
+						toStringListBytes1(result));
 
 			} else {
 				System.out.printf(" [ EchoArray3 ][ setBS ] event empty. \n");
@@ -310,6 +310,15 @@ public class Array3Client {
 		} catch (Exception e) {
 			System.out.printf(" [ EchoArray3 ][ setBS ] failed, error message is %s\n", e.getMessage());
 		}
+	}
+	
+	public static List<String> toStringListBytes1(List<byte[]> byteList) {
+		List<String> result = new ArrayList<String>();
+		for(int i = 0;i<byteList.size();i++) {
+			result.add(new String(byteList.get(i)));
+		}
+		
+		return result;
 	}
 	
 	public void set(List<BigInteger> _u, List<BigInteger> _i, List<Boolean> _b, List<String> _addr, List<byte[]> _bs32, List<String> _s, List<byte[]> _bs) {
@@ -322,10 +331,11 @@ public class Array3Client {
 			if (!response.isEmpty()) {
 
 				Tuple7<List<BigInteger>, List<BigInteger>, List<Boolean>, List<String>, List<byte[]>, List<String>, List<byte[]>> result = simple.get().send();
+				Tuple7<List<BigInteger>, List<BigInteger>, List<Boolean>, List<String>, List<String>, List<String>, List<String>> result0 = new Tuple7(result.getValue1(), result.getValue2(), result.getValue3(), result.getValue4(), toStringListBytes1(result.getValue5()), result.getValue6(), toStringListBytes1(result.getValue7()));
 				
 				System.out.printf(
 						" [ EchoArray3 ][ set ] success => getString result : %s \n",
-						result);
+						result0);
 				
 
 			} else {

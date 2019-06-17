@@ -327,10 +327,10 @@ public class ArrayClient {
 			if (!response.isEmpty()) {
 
 				Tuple7<List<BigInteger>, List<BigInteger>, List<Boolean>, List<String>, List<byte[]>, List<String>, List<byte[]>> result = simple.get().send();
-
+				Tuple7<List<BigInteger>, List<BigInteger>, List<Boolean>, List<String>, List<String>, List<String>, List<String>> result0 = new Tuple7(result.getValue1(), result.getValue2(), result.getValue3(), result.getValue4(), toStringListBytes1(result.getValue5()), result.getValue6(), toStringListBytes1(result.getValue7()));
 				System.out.printf(
 						" [ EchoArray ][ set ] success => getString result : %s \n",
-						result);
+						result0);
 
 			} else {
 				System.out.printf(" [ EchoArray ][ set ] event empty. \n");
@@ -362,7 +362,7 @@ public class ArrayClient {
 		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayClient setBS32 01234567890123456789012345678901 01234567890123456789012345678901 01234567890123456789012345678901");
 		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayClient setString aaaaa bbbbbb jlkaldsjfkld");
 		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayClient setBS adf ljklj  jljlkjl jkjljlkjl");
-		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayClient set 1|2|3 -1|2|-4 true|false|true afdaf|fadsfdsf|fdafdfdf 01234567890123456789012345678901  adfaf|jllkj aaa ]");
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayClient set 1|2|3 -1|2|-4 true|false|true 0x0|0x1|0x2 01234567890123456789012345678901  adfaf|jllkj aaa ]");
 		System.exit(0);
 	}
 	
