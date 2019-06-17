@@ -336,6 +336,7 @@ public class ArrayClient {
 				System.out.printf(" [ EchoArray ][ set ] event empty. \n");
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.printf(" [ EchoArray ][ set ] failed, error message is %s\n", e.getMessage());
 		}
 	}
