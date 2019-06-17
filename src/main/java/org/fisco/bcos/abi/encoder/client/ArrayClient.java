@@ -134,8 +134,8 @@ public class ArrayClient {
 				List result = arrayObj.getUint().send();
 
 				System.out.printf(
-						" [ EchoArray ][ setUinit ] success => event : %s , getUint result : %s \n",
-						response.get(0).u, result);
+						" [ EchoArray ][ setUinit ] success => getUint result : %s \n",
+						result);
 
 			} else {
 				System.out.printf(" [ EchoArray ][ setUinit ] event empty. \n");
@@ -157,8 +157,8 @@ public class ArrayClient {
 				List result = arrayObj.getInt().send();
 
 				System.out.printf(
-						" [ EchoArray ][ setInt ] success => event : %s , getInt result : %s \n",
-						response.get(0).i, result);
+						" [ EchoArray ][ setInt ] success => getInt result : %s \n",
+						result);
 
 			} else {
 				System.out.printf(" [ EchoArray ][ setInit ] event empty. \n");
@@ -180,7 +180,7 @@ public class ArrayClient {
 				List result = arrayObj.getBool().send();
 
 				System.out.printf(
-						" [ EchoArray ][ setBool ] success => event : %s , getBool result : %s \n",
+						" [ EchoArray ][ setBool ] success => getBool result : %s \n",
 						response.get(0)._b, result);
 
 			} else {
@@ -203,7 +203,7 @@ public class ArrayClient {
 				List result = arrayObj.getAddr().send();
 
 				System.out.printf(
-						" [ EchoArray ][ setAddr ] success => event : %s , getAddr result : %s \n",
+						" [ EchoArray ][ setAddr ] success => getAddr result : %s \n",
 						response.get(0).addr, result);
 
 			} else {

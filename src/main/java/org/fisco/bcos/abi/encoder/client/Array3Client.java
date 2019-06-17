@@ -135,8 +135,7 @@ public class Array3Client {
 				List result = arrayObj.getUint().send();
 
 				System.out.printf(
-						" [ EchoArray3 ][ setUinit ] success => event : %s , getUint result : %s \n",
-						response.get(0).u, result);
+						" [ EchoArray3 ][ setUinit ] success => getUint result : %s \n", result);
 
 			} else {
 				System.out.printf(" [ EchoArray3 ][ setUinit ] event empty. \n");
@@ -185,8 +184,8 @@ public class Array3Client {
 				List result = arrayObj.getInt().send();
 
 				System.out.printf(
-						" [ EchoArray3 ][ setInt ] success => event : %s , getInt result : %s \n",
-						response.get(0).i, result);
+						" [ EchoArray3 ][ setInt ] success => getInt result : %s \n",
+						result);
 
 			} else {
 				System.out.printf(" [ EchoArray3 ][ setInit ] event empty. \n");
@@ -208,8 +207,7 @@ public class Array3Client {
 				List result = arrayObj.getBool().send();
 
 				System.out.printf(
-						" [ EchoArray3 ][ setBool ] success => event : %s , getBool result : %s \n",
-						response.get(0)._b, result);
+						" [ EchoArray3 ][ setBool ] success => getBool result : %s \n", result);
 
 			} else {
 				System.out.printf(" [ EchoArray3 ][ setBool ] event empty. \n");
@@ -231,8 +229,8 @@ public class Array3Client {
 				List result = arrayObj.getAddr().send();
 
 				System.out.printf(
-						" [ EchoArray3 ][ setAddr ] success => event : %s , getAddr result : %s \n",
-						response.get(0).addr, result);
+						" [ EchoArray3 ][ setAddr ] success => getAddr result : %s \n",
+						result);
 
 			} else {
 				System.out.printf(" [ EchoArray3 ][ setAddr ] event empty. \n");
@@ -254,8 +252,8 @@ public class Array3Client {
 				List result = arrayObj.getBS32().send();
 
 				System.out.printf(
-						" [ EchoArray3 ][ setBS32 ] success => event : %s , getBS32 result : %s \n",
-						response.get(0).b, result);
+						" [ EchoArray3 ][ setBS32 ] success => getBS32 result : %s \n",
+						result);
 
 			} else {
 				System.out.printf(" [ EchoArray3 ][ setBS32 ] event empty. \n");
@@ -277,8 +275,8 @@ public class Array3Client {
 				List result = simple.getString().send();
 
 				System.out.printf(
-						" [ EchoArray3 ][ setString ] success => event : %s , getString result : %s \n",
-						response.get(0).s, result);
+						" [ EchoArray3 ][ setString ] success => getString result : %s \n",
+						result);
 
 			} else {
 				System.out.printf(" [ EchoArray3 ][ setString ] event empty. \n");
@@ -300,8 +298,8 @@ public class Array3Client {
 				List result = arrayObj.getBS().send();
 
 				System.out.printf(
-						" [ EchoArray3 ][ setBS ] success => event : %s , getString result : %s \n",
-						response.get(0).b, result);
+						" [ EchoArray3 ][ setBS ] success =>  getString result : %s \n",
+						result);
 
 			} else {
 				System.out.printf(" [ EchoArray3 ][ setBS ] event empty. \n");
@@ -323,8 +321,8 @@ public class Array3Client {
 				Tuple7<List<BigInteger>, List<BigInteger>, List<Boolean>, List<String>, List<byte[]>, List<String>, List<byte[]>> result = simple.get().send();
 				
 				System.out.printf(
-						" [ EchoArray3 ][ set ] success => event : %s , getString result : %s \n",
-						response.get(0).toString(), result);
+						" [ EchoArray3 ][ set ] success => getString result : %s \n",
+						result);
 				
 
 			} else {
