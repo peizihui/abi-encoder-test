@@ -375,7 +375,7 @@ public class ArrayClient {
 	
 	public static List<BigInteger> toBigIntegerList(String s) {
 		List<BigInteger> r = new ArrayList<BigInteger>();
-		String[] args = s.split("|");
+		String[] args = s.split("\\|");
 		for (int i = 0; i < args.length; ++i) {
 			r.add(new BigInteger(args[i]));
 		}
@@ -392,7 +392,7 @@ public class ArrayClient {
 	
 	public static List<Boolean> toBoolList(String s) {
 		List<Boolean> r = new ArrayList<Boolean>();
-		String[] args = s.split("|");
+		String[] args = s.split("\\|");
 		for (int i = 0; i < args.length; ++i) {
 			r.add(Boolean.parseBoolean(args[i]));
 		}
@@ -409,7 +409,7 @@ public class ArrayClient {
 	}
 	
 	public static List<String> toAddrList(String s) {
-		String[] args = s.split("|");
+		String[] args = s.split("\\|");
 		List<String> r = new ArrayList<String>();
 		for (int i = 0; i < args.length; ++i) {
 			Address addr = new Address(args[i]);
@@ -427,7 +427,7 @@ public class ArrayClient {
 	}
 	
 	public static List<String> toStringList(String s) {
-		String[] args = s.split("|");
+		String[] args = s.split("\\|");
 		List<String> r = new ArrayList<String>();
 		for (int i = 0; i < args.length; ++i) {
 			r.add(args[i]);
@@ -445,7 +445,7 @@ public class ArrayClient {
 	}
 	
 	public static List<byte[]> toBS32List(String s) {
-		String[] args = s.split("|");
+		String[] args = s.split("\\|");
 		List<byte[]> r = new ArrayList<byte[]>();
 		for (int i = 0; i < args.length; ++i) {
 			Bytes32 b = new Bytes32(args[i].getBytes());
@@ -463,7 +463,7 @@ public class ArrayClient {
 	}
 	
 	public static List<byte[]> toBSList(String s) {
-		String[] args = s.split("|");
+		String[] args = s.split("\\|");
 		List<byte[]> r = new ArrayList<byte[]>();
 		for (int i = 0; i < args.length; ++i) {
 			r.add(args[i].getBytes());
@@ -471,7 +471,7 @@ public class ArrayClient {
 		return r;
 	}
 
-	public static void main(String[] args) throws Exception {
+	public static void main0(String[] args) throws Exception {
 
 		if (args.length < 1) {
 			Usage();

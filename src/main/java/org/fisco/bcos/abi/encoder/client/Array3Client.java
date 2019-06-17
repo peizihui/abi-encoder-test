@@ -377,7 +377,7 @@ public class Array3Client {
 	
 	public static List<BigInteger> toBigIntegerList(String s) {
 		List<BigInteger> r = new ArrayList<BigInteger>();
-		String[] args = s.split("|");
+		String[] args = s.split("\\|");
 		checkListLength(args);
 		for (int i = 0; i < args.length; ++i) {
 			r.add(new BigInteger(args[i]));
@@ -396,7 +396,7 @@ public class Array3Client {
 	
 	public static List<Boolean> toBoolList(String s) {
 		List<Boolean> r = new ArrayList<Boolean>();
-		String[] args = s.split("|");
+		String[] args = s.split("\\|");
 		checkListLength(args);
 		for (int i = 0; i < args.length; ++i) {
 			r.add(Boolean.parseBoolean(args[i]));
@@ -414,7 +414,7 @@ public class Array3Client {
 	}
 	
 	public static List<String> toAddrList(String s) {
-		String[] args = s.split("|");
+		String[] args = s.split("\\|");
 		checkListLength(args);
 		List<String> r = new ArrayList<String>();
 		for (int i = 0; i < args.length; ++i) {
@@ -433,7 +433,7 @@ public class Array3Client {
 	}
 	
 	public static List<String> toStringList(String s) {
-		String[] args = s.split("|");
+		String[] args = s.split("\\|");
 		checkListLength(args);
 		List<String> r = new ArrayList<String>();
 		for (int i = 0; i < args.length; ++i) {
@@ -452,7 +452,7 @@ public class Array3Client {
 	}
 	
 	public static List<byte[]> toBSList(String s) {
-		String[] args = s.split("|");
+		String[] args = s.split("\\|");
 		checkListLength(args);
 		List<byte[]> r = new ArrayList<byte[]>();
 		for (int i = 0; i < args.length; ++i) {
