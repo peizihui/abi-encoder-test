@@ -13,10 +13,18 @@ public class CallBackUtils {
 	
 	public static boolean openCallBack = true;
 	
+	public static void setOpenCallBack(boolean _openCallBack) {
+		openCallBack = _openCallBack;
+	}
+	
+	public static boolean getOpenCallBack() {
+		return openCallBack;
+	}
+	
 	public static void txDecodeInCallBack(TransactionDecoder decode, TransactionReceipt receipt) {
 		
-		if(openCallBack) {
-			System.out.println(" receipt => " + receipt);
+		if(getOpenCallBack()) {
+			// System.out.println(" receipt => " + receipt);
 			
 			try {
 				System.out.println(" input json => ");

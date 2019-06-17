@@ -46,6 +46,8 @@ dependencies {
     runtime 'io.netty:netty-tcnative:2.0.0.Final'
     compile 'com.google.guava:guava:19.0'
     runtime 'com.google.guava:guava:19.0'
+    
+    compile 'org.slf4j:slf4j-api:1.7.25'
 
      // web3j
     compile 'org.apache.httpcomponents:httpclient:4.5.2',
@@ -56,6 +58,7 @@ dependencies {
 	    'com.github.jnr:jnr-unixsocket:0.15',
 	    'io.reactivex.rxjava2:rxjava:2.2.2',
 	    'io.bretty:console-table-builder:1.2'
+	    
 }
 
 sourceSets {
