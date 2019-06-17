@@ -181,7 +181,7 @@ public class ArrayClient {
 
 				System.out.printf(
 						" [ EchoArray ][ setBool ] success => getBool result : %s \n",
-						response.get(0)._b, result);
+						result);
 
 			} else {
 				System.out.printf(" [ EchoArray ][ setBool ] event empty. \n");
@@ -204,7 +204,7 @@ public class ArrayClient {
 
 				System.out.printf(
 						" [ EchoArray ][ setAddr ] success => getAddr result : %s \n",
-						response.get(0).addr, result);
+						result);
 
 			} else {
 				System.out.printf(" [ EchoArray ][ setAddr ] event empty. \n");
@@ -256,8 +256,7 @@ public class ArrayClient {
 				List result = arrayObj.getBS32().send();
 
 				System.out.printf(
-						" [ EchoArray ][ setBS32 ] success => event : %s , getBS32 result : %s \n",
-						response.get(0).b, 
+						" [ EchoArray ][ setBS32 ] success => getBS32 result : %s \n",
 						result);
 
 			} else {
@@ -280,8 +279,8 @@ public class ArrayClient {
 				List result = simple.getString().send();
 
 				System.out.printf(
-						" [ EchoArray ][ setString ] success => event : %s , getString result : %s \n",
-						response.get(0).s, result);
+						" [ EchoArray ][ setString ] success => getString result : %s \n",
+						result);
 
 			} else {
 				System.out.printf(" [ EchoArray ][ setString ] event empty. \n");
@@ -303,8 +302,8 @@ public class ArrayClient {
 				List result = arrayObj.getBS().send();
 				
 				System.out.printf(
-						" [ EchoArray ][ setBS ] success => event : %s , getString result : %s \n",
-						response.get(0).b, result);
+						" [ EchoArray ][ setBS ] success => getString result : %s \n",
+						result);
 			} else {
 				System.out.printf(" [ EchoArray ][ setBS ] event empty. \n");
 			}
@@ -325,8 +324,8 @@ public class ArrayClient {
 				Tuple7<List<BigInteger>, List<BigInteger>, List<Boolean>, List<String>, List<byte[]>, List<String>, List<byte[]>> result = simple.get().send();
 
 				System.out.printf(
-						" [ EchoArray ][ set ] success => event : %s , getString result : %s \n",
-						response.get(0), result);
+						" [ EchoArray ][ set ] success => getString result : %s \n",
+						result);
 
 			} else {
 				System.out.printf(" [ EchoArray ][ set ] event empty. \n");
