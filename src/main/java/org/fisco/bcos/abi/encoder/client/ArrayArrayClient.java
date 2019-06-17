@@ -24,6 +24,8 @@ import org.fisco.bcos.abi.encoder.contract.EchoArrayArray.EventStringEventRespon
 import org.fisco.bcos.abi.encoder.contract.EchoArrayArray.EventUintEventResponse;
 import org.fisco.bcos.channel.client.Service;
 import org.fisco.bcos.web3j.abi.datatypes.Bool;
+import org.fisco.bcos.web3j.abi.datatypes.DynamicBytes;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes32;
 import org.fisco.bcos.web3j.abi.datatypes.generated.Int256;
 import org.fisco.bcos.web3j.abi.datatypes.generated.Uint256;
 import org.fisco.bcos.web3j.crypto.Credentials;
@@ -168,14 +170,14 @@ public class ArrayArrayClient {
 		return result;
 	}
 	
-	List<List<String>> toStringlListList(List<List<byte[]>> params) {
+	List<List<String>> toStringlListList0(List<List<DynamicBytes>> params) {
 		
 		List<List<String>> result = new ArrayList<List<String>>();
 		
 		for(int i=0;i<params.size();++i) {
 			List<String> r = new ArrayList<String>();
 			for(int j = 0;j<params.get(i).size();++j) {
-				r.add(new String(params.get(i).get(j)));
+				r.add(new String(params.get(i).get(j).getValue()));
 			}
 			
 			result.add(r);
@@ -183,7 +185,23 @@ public class ArrayArrayClient {
 		
 		return result;
 	}
-
+	
+	List<List<String>> toStringlListList1(List<List<Bytes32>> params) {
+		
+		List<List<String>> result = new ArrayList<List<String>>();
+		
+		for(int i=0;i<params.size();++i) {
+			List<String> r = new ArrayList<String>();
+			for(int j = 0;j<params.get(i).size();++j) {
+				r.add(new String(params.get(i).get(j).getValue()));
+			}
+			
+			result.add(r);
+		}
+		
+		return result;
+	}
+	
 	public void setUint(List<List<BigInteger>> _u) {
 		try {
 			EchoArrayArray arrayObj = EchoArrayArray.load(loadAddr(), web3j, credentials,
@@ -287,7 +305,7 @@ public class ArrayArrayClient {
 
 				System.out.printf(
 						" [ EchoArrayArray ][ setBS32 ] success =>  getBS32 result : %s \n",
-						toStringlListList(result));
+						toStringlListList1(result));
 
 			} else {
 				System.out.printf(" [ EchoArrayArray ][ setBS32 ] event empty. \n");
@@ -331,7 +349,7 @@ public class ArrayArrayClient {
 
 				System.out.printf(
 						" [ EchoArrayArray ][ setBS ] success => getString result : %s \n",
-						toStringlListList(result));
+						toStringlListList0(result));
 
 			} else {
 				System.out.printf(" [ EchoArrayArray ][ setBS ] event empty. \n");
