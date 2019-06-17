@@ -471,7 +471,7 @@ public class ArrayClient {
 		return r;
 	}
 
-	public static void main0(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
 
 		if (args.length < 1) {
 			Usage();
