@@ -366,7 +366,7 @@ public class Array3Client {
 		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.Array3Client setBS32 01234567890123456789012345678901 01234567890123456789012345678901 01234567890123456789012345678901");
 		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.Array3Client setString aaaaa bbbbbb jlkaldsjfkld");
 		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.Array3Client setBS adf ljklj  jljlkjl");
-		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.Array3Client set 1|2|3 -1|2|-4 true|false|true afdaf|fadsfdsf|fdafdfdf 01234567890123456789012345678901|01234567890123456789012345678901|01234567890123456789012345678901  adfaf|jllkj|jllkj aaa|aaa|aaa ]");
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.Array3Client set 1|2|3 -1|2|-4 true|false|true 0x0|0x1|0x2 01234567890123456789012345678901|01234567890123456789012345678901|01234567890123456789012345678901  adfaf|jllkj|jllkj aaa|aaa|aaa ]");
 		System.exit(0);
 	}
 	
