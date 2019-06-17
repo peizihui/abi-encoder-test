@@ -12,6 +12,8 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.fisco.bcos.abi.encoder.contract.EchoArrayArray.EventBSEventResponse;
+import org.fisco.bcos.abi.encoder.callback.EchoArrayArrayCallBack;
+import org.fisco.bcos.abi.encoder.callback.EchoArrayCallBack;
 import org.fisco.bcos.abi.encoder.contract.EchoArrayArray;
 import org.fisco.bcos.abi.encoder.contract.EchoArrayArray.EventAddrEventResponse;
 import org.fisco.bcos.abi.encoder.contract.EchoArrayArray.EventB32EventResponse;
@@ -21,6 +23,8 @@ import org.fisco.bcos.abi.encoder.contract.EchoArrayArray.EventIntEventResponse;
 import org.fisco.bcos.abi.encoder.contract.EchoArrayArray.EventStringEventResponse;
 import org.fisco.bcos.abi.encoder.contract.EchoArrayArray.EventUintEventResponse;
 import org.fisco.bcos.channel.client.Service;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int256;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint256;
 import org.fisco.bcos.web3j.crypto.Credentials;
 import org.fisco.bcos.web3j.crypto.Keys;
 import org.fisco.bcos.web3j.protocol.Web3j;
@@ -40,6 +44,8 @@ public class ArrayArrayClient {
 	private Web3j web3j;
 
 	private Credentials credentials;
+	
+	private EchoArrayArrayCallBack callBack = new EchoArrayArrayCallBack();
 
 	public Web3j getWeb3j() {
 		return web3j;
@@ -116,6 +122,36 @@ public class ArrayArrayClient {
 			System.out.println(" deploy EchoArrayArray contract failed, error message is  " + e.getMessage());
 		}
 	}
+	
+	List<List<BigInteger>> toBigIntegerListList(List<List<Uint256>> params) {
+		List<List<BigInteger>> result = new ArrayList<List<BigInteger>>();
+		
+		for(int i=0;i<params.size();++i) {
+			List<BigInteger> r = new ArrayList<BigInteger>();
+			for(int j = 0;j<params.get(i).size();++j) {
+				r.add(params.get(i).get(j).getValue());
+			}
+			
+			result.add(r);
+		}
+		
+		return result;
+	}
+	
+	List<List<BigInteger>> toBigIntegerListList0(List<List<Int256>> params) {
+		List<List<BigInteger>> result = new ArrayList<List<BigInteger>>();
+		
+		for(int i=0;i<params.size();++i) {
+			List<BigInteger> r = new ArrayList<BigInteger>();
+			for(int j = 0;j<params.get(i).size();++j) {
+				r.add(params.get(i).get(j).getValue());
+			}
+			
+			result.add(r);
+		}
+		
+		return result;
+	}
 
 	public void setUint(List<List<BigInteger>> _u) {
 		try {
@@ -124,13 +160,14 @@ public class ArrayArrayClient {
 			TransactionReceipt receipt = arrayObj.setUint(_u).send();
 
 			List<EventUintEventResponse> response = arrayObj.getEventUintEvents(receipt);
+			callBack.onResponse(receipt);
 			if (!response.isEmpty()) {
 
 				List result = arrayObj.getUint().send();
 
 				System.out.printf(
 						" [ EchoArrayArray ][ setUinit ] success => getUint result : %s \n",
-						result);
+						toBigIntegerListList(result));
 
 			} else {
 				System.out.printf(" [ EchoArrayArray ][ setUinit ] event empty. \n");
@@ -147,13 +184,14 @@ public class ArrayArrayClient {
 			TransactionReceipt receipt = arrayObj.setInt(_i).send();
 
 			List<EventIntEventResponse> response = arrayObj.getEventIntEvents(receipt);
+			callBack.onResponse(receipt);
 			if (!response.isEmpty()) {
 
 				List result = arrayObj.getInt().send();
 
 				System.out.printf(
 						" [ EchoArrayArray ][ setInt ] success => getInt result : %s \n",
-						result);
+						toBigIntegerListList0(result));
 
 			} else {
 				System.out.printf(" [ EchoArrayArray ][ setInit ] event empty. \n");
@@ -170,6 +208,7 @@ public class ArrayArrayClient {
 			TransactionReceipt receipt = arrayObj.setBool(_b).send();
 
 			List<EventBoolEventResponse> response = arrayObj.getEventBoolEvents(receipt);
+			callBack.onResponse(receipt);
 			if (!response.isEmpty()) {
 
 				List result = arrayObj.getBool().send();
@@ -191,7 +230,7 @@ public class ArrayArrayClient {
 			EchoArrayArray arrayObj = EchoArrayArray.load(loadAddr(), web3j, credentials,
 					new StaticGasProvider(gasPrice, gasLimit));
 			TransactionReceipt receipt = arrayObj.setAddr(_addr).send();
-
+			callBack.onResponse(receipt);
 			List<EventAddrEventResponse> response = arrayObj.getEventAddrEvents(receipt);
 			if (!response.isEmpty()) {
 
@@ -214,7 +253,7 @@ public class ArrayArrayClient {
 			EchoArrayArray arrayObj = EchoArrayArray.load(loadAddr(), web3j, credentials,
 					new StaticGasProvider(gasPrice, gasLimit));
 			TransactionReceipt receipt = arrayObj.setBS32(_b).send();
-
+			callBack.onResponse(receipt);
 			List<EventB32EventResponse> response = arrayObj.getEventB32Events(receipt);
 			if (!response.isEmpty()) {
 
@@ -237,7 +276,7 @@ public class ArrayArrayClient {
 			EchoArrayArray simple = EchoArrayArray.load(loadAddr(), web3j, credentials,
 					new StaticGasProvider(gasPrice, gasLimit));
 			TransactionReceipt receipt = simple.setString(s).send();
-
+			callBack.onResponse(receipt);
 			List<EventStringEventResponse> response = simple.getEventStringEvents(receipt);
 			if (!response.isEmpty()) {
 
@@ -260,7 +299,7 @@ public class ArrayArrayClient {
 			EchoArrayArray arrayObj = EchoArrayArray.load(loadAddr(), web3j, credentials,
 					new StaticGasProvider(gasPrice, gasLimit));
 			TransactionReceipt receipt = arrayObj.setBS(_b).send();
-
+			callBack.onResponse(receipt);
 			List<EventBSEventResponse> response = arrayObj.getEventBSEvents(receipt);
 			if (!response.isEmpty()) {
 
@@ -283,7 +322,7 @@ public class ArrayArrayClient {
 			EchoArrayArray simple = EchoArrayArray.load(loadAddr(), web3j, credentials,
 					new StaticGasProvider(gasPrice, gasLimit));
 			TransactionReceipt receipt = simple.set(_u, _i, _b, _addr, _bs32, _s, _bs).send();
-
+			callBack.onResponse(receipt);
 			List<EventEventResponse> response = simple.getEventEvents(receipt);
 			if (!response.isEmpty()) {
 

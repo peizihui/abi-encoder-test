@@ -23,7 +23,6 @@ import org.fisco.bcos.abi.encoder.contract.EchoArray.EventStringEventResponse;
 import org.fisco.bcos.abi.encoder.contract.EchoArray.EventUintEventResponse;
 import org.fisco.bcos.channel.client.Service;
 import org.fisco.bcos.web3j.abi.datatypes.Address;
-import org.fisco.bcos.web3j.abi.datatypes.DynamicBytes;
 import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes32;
 import org.fisco.bcos.web3j.crypto.Credentials;
 import org.fisco.bcos.web3j.crypto.Keys;
