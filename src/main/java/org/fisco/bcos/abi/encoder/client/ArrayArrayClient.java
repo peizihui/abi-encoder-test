@@ -23,6 +23,7 @@ import org.fisco.bcos.abi.encoder.contract.EchoArrayArray.EventIntEventResponse;
 import org.fisco.bcos.abi.encoder.contract.EchoArrayArray.EventStringEventResponse;
 import org.fisco.bcos.abi.encoder.contract.EchoArrayArray.EventUintEventResponse;
 import org.fisco.bcos.channel.client.Service;
+import org.fisco.bcos.web3j.abi.datatypes.Bool;
 import org.fisco.bcos.web3j.abi.datatypes.generated.Int256;
 import org.fisco.bcos.web3j.abi.datatypes.generated.Uint256;
 import org.fisco.bcos.web3j.crypto.Credentials;
@@ -150,6 +151,38 @@ public class ArrayArrayClient {
 		
 		return result;
 	}
+	
+	List<List<Boolean>> toBoolListList(List<List<Bool>> params) {
+		
+		List<List<Boolean>> result = new ArrayList<List<Boolean>>();
+		
+		for(int i=0;i<params.size();++i) {
+			List<Boolean> r = new ArrayList<Boolean>();
+			for(int j = 0;j<params.get(i).size();++j) {
+				r.add(params.get(i).get(j).getValue());
+			}
+			
+			result.add(r);
+		}
+		
+		return result;
+	}
+	
+	List<List<String>> toStringlListList(List<List<byte[]>> params) {
+		
+		List<List<String>> result = new ArrayList<List<String>>();
+		
+		for(int i=0;i<params.size();++i) {
+			List<String> r = new ArrayList<String>();
+			for(int j = 0;j<params.get(i).size();++j) {
+				r.add(new String(params.get(i).get(j)));
+			}
+			
+			result.add(r);
+		}
+		
+		return result;
+	}
 
 	public void setUint(List<List<BigInteger>> _u) {
 		try {
@@ -210,7 +243,7 @@ public class ArrayArrayClient {
 
 				System.out.printf(
 						" [ EchoArrayArray ][ setBool ] success => getBool result : %s \n",
-						result);
+						toBoolListList(result));
 
 			} else {
 				System.out.printf(" [ EchoArrayArray ][ setBool ] event empty. \n");
@@ -254,7 +287,7 @@ public class ArrayArrayClient {
 
 				System.out.printf(
 						" [ EchoArrayArray ][ setBS32 ] success =>  getBS32 result : %s \n",
-						result.toString());
+						toStringlListList(result));
 
 			} else {
 				System.out.printf(" [ EchoArrayArray ][ setBS32 ] event empty. \n");
@@ -298,7 +331,7 @@ public class ArrayArrayClient {
 
 				System.out.printf(
 						" [ EchoArrayArray ][ setBS ] success => getString result : %s \n",
-						result.toString());
+						toStringlListList(result));
 
 			} else {
 				System.out.printf(" [ EchoArrayArray ][ setBS ] event empty. \n");
@@ -328,15 +361,26 @@ public class ArrayArrayClient {
 
 	public static void Usage() {
 		System.out.println(" Usage:");
-		System.out.println("\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayClient deploy");
-		System.out.println("\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayClient setUint [ BigInteger ... ] ");
-		System.out.println("\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayClient setInt [ BigInteger ... ]");
-		System.out.println("\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayClient setBool [ Bool ... ]");
-		System.out.println("\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayClient setAddr [ Address ... ]");
-		System.out.println("\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayClient setBS32 [ Bytes32 ... ]");
-		System.out.println("\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayClient setString [ String ... ]");
-		System.out.println("\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayClient setBS [ Bytes ... ]");
-		System.out.println("\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayClient set [ BigInteger ..., BigInteger ..., Boolean ..., String ..., byte[] ..., String ..., byte[]... ]");
+		System.out.println("\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient deploy");
+		System.out.println("\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setUint [ BigInteger ... ] ");
+		System.out.println("\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setInt [ BigInteger ... ]");
+		System.out.println("\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setBool [ Bool ... ]");
+		System.out.println("\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setAddr [ Address ... ]");
+		System.out.println("\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setBS32 [ Bytes32 ... ]");
+		System.out.println("\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setString [ String ... ]");
+		System.out.println("\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setBS [ Bytes ... ]");
+		System.out.println("\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient set [ BigInteger ..., BigInteger ..., Boolean ..., String ..., byte[] ..., String ..., byte[]... ]");
+		
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient deploy");
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setUint 1|1|2  2|2|2 ");
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setInt -1|-2|3 4|5");
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setBool false|false|true true false|true" );
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setAddr 0x777788889999AaAAbBbbCcccddDdeeeEfFFfCcCc 0x777788889999AaAAbBbbCcccddDdeeeEfFFfCcCc ");
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setBS32 01234567890123456789012345678901 01234567890123456789012345678901 01234567890123456789012345678901");
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setString aaaaa bbbbbb jlkaldsjfkld");
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setBS adf ljklj  jljlkjl jkjljlkjl");
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient set 1|2|3 -1|2|-4 true|false|true 0x0|0x1|0x2 01234567890123456789012345678901  adfaf|jllkj aaa ]");
+		System.exit(0);
 		System.exit(0);
 	}
 	
