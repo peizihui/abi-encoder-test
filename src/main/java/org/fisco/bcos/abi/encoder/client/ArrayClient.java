@@ -223,7 +223,9 @@ public class ArrayClient {
 		return result;
 	}
 	
-	public static List<String> toStringListBytes(List<DynamicBytes> byteList) {
+
+	
+	public static List<String> toStringListBytes1(List<DynamicBytes> byteList) {
 		List<String> result = new ArrayList<String>();
 		for(int i = 0;i<byteList.size();i++) {
 			result.add(new String(byteList.get(i).getValue()));
@@ -255,8 +257,8 @@ public class ArrayClient {
 
 				System.out.printf(
 						" [ EchoArray ][ setBS32 ] success => event : %s , getBS32 result : %s \n",
-						toStringList(response.get(0).b), 
-						toStringListByte32(result));
+						response.get(0).b, 
+						result);
 
 			} else {
 				System.out.printf(" [ EchoArray ][ setBS32 ] event empty. \n");
@@ -299,20 +301,14 @@ public class ArrayClient {
 			if (!response.isEmpty()) {
 
 				List result = arrayObj.getBS().send();
-				System.out.println(response.get(0).b);
-				List<String> r0 = toStringList(response.get(0).b);
-				List<String> r1 = toStringListBytes(result);
-
+				
 				System.out.printf(
 						" [ EchoArray ][ setBS ] success => event : %s , getString result : %s \n",
-						r0, 
-						r1);
-
+						response.get(0).b, result);
 			} else {
 				System.out.printf(" [ EchoArray ][ setBS ] event empty. \n");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			System.out.printf(" [ EchoArray ][ setBS ] failed, error message is %s\n", e.getMessage());
 		}
 	}

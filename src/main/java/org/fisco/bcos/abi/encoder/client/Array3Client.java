@@ -255,7 +255,7 @@ public class Array3Client {
 
 				System.out.printf(
 						" [ EchoArray3 ][ setBS32 ] success => event : %s , getBS32 result : %s \n",
-						toStringList(response.get(0).b), toStringListByte32(result));
+						response.get(0).b, result);
 
 			} else {
 				System.out.printf(" [ EchoArray3 ][ setBS32 ] event empty. \n");
@@ -301,7 +301,7 @@ public class Array3Client {
 
 				System.out.printf(
 						" [ EchoArray3 ][ setBS ] success => event : %s , getString result : %s \n",
-						toStringList(response.get(0).b), toStringListBytes(result));
+						response.get(0).b, result);
 
 			} else {
 				System.out.printf(" [ EchoArray3 ][ setBS ] event empty. \n");
