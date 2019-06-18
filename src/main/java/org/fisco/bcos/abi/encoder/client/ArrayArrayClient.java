@@ -12,8 +12,6 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.fisco.bcos.abi.encoder.contract.EchoArrayArray.EventBSEventResponse;
-import org.fisco.bcos.abi.encoder.callback.EchoArrayArrayCallBack;
-import org.fisco.bcos.abi.encoder.callback.EchoArrayCallBack;
 import org.fisco.bcos.abi.encoder.contract.EchoArrayArray;
 import org.fisco.bcos.abi.encoder.contract.EchoArrayArray.EventAddrEventResponse;
 import org.fisco.bcos.abi.encoder.contract.EchoArrayArray.EventB32EventResponse;
@@ -368,7 +366,11 @@ public class ArrayArrayClient {
 			if (!response.isEmpty()) {
 
 				Tuple7<List<List<BigInteger>>, List<List<BigInteger>>, List<List<Boolean>>, List<List<String>>, List<List<byte[]>>, List<List<String>>, List<List<byte[]>>> result = simple.get().send();
-	
+				//Tuple7<List<List<BigInteger>>, List<List<BigInteger>>, List<List<Boolean>>, List<List<String>>, List<List<String>>, List<List<String>>, List<List<String>>> result0 =  new Tuple7<List<List<BigInteger>>, List<List<BigInteger>>, List<List<Boolean>>, List<List<String>>, List<List<String>>, List<List<String>>, List<List<String>>>(toBigIntegerListList(result.getValue1()), _i, _b, _s, _s, _s, _s);
+				
+				System.out.printf(
+				" [ EchoArrayArray ][ set ] success => getString result : %s \n",
+						result);
 			} else {
 				System.out.printf(" [ EchoArrayArray ][ set ] event empty. \n");
 			}
@@ -393,12 +395,11 @@ public class ArrayArrayClient {
 		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setUint 1|1|2  2|2|2 ");
 		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setInt -1|-2|3 4|5");
 		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setBool false|false|true true false|true" );
-		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setAddr 0x777788889999AaAAbBbbCcccddDdeeeEfFFfCcCc 0x777788889999AaAAbBbbCcccddDdeeeEfFFfCcCc ");
-		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setBS32 01234567890123456789012345678901 01234567890123456789012345678901 01234567890123456789012345678901");
-		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setString aaaaa bbbbbb jlkaldsjfkld");
-		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setBS adf ljklj  jljlkjl jkjljlkjl");
-		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient set 1|2|3 -1|2|-4 true|false|true 0x0|0x1|0x2 01234567890123456789012345678901  adfaf|jllkj aaa ]");
-		System.exit(0);
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setAddr 0x0|0x1 0x0 0x0|0x1|0x3 ");
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setBS32 01234567890123456789012345678901|01234567890123456789012345678901 01234567890123456789012345678901 01234567890123456789012345678901|01234567890123456789012345678901|01234567890123456789012345678901|01234567890123456789012345678901");
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setString aaaaa|dddddd bbbbbb jlkaldsjfkld|d|ddffddd|dhkjlkjl");
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setBS aaaaa|dddddd bbbbbb jlkaldsjfkld|d|ddffddd|dhkjlkjl");
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient set 0#1|2|3#-1|2|-4##1 true|false|true#true#false|false 0x0|0x1|0x2#0x9|0c1|0c9#0x9|0x8 01234567890123456789012345678901#01234567890123456789012345678901#01234567890123456789012345678901  aaafd|bbbdfsa|cfascc#aaafa#bbbafd##ccafc#dfljafk|fdjkjkl|fdsjlj aaa|bbb|ccc#aaa#bbb#ccc#dfljk|fdjkjkl|fdsjlj");
 		System.exit(0);
 	}
 	
@@ -406,7 +407,22 @@ public class ArrayArrayClient {
 		List<BigInteger> r = new ArrayList<BigInteger>();
 		String[] args = s.split("\\|");
 		for (int i = 0; i < args.length; ++i) {
-			r.add(new BigInteger(args[i]));
+			if(args[i].trim().equals("") ) {
+				continue;
+			}
+			else 
+			{
+				r.add(new BigInteger(args[i]));
+			}
+		}
+		return r;
+	}
+	
+	public static List<List<BigInteger>> toBigIntegerListList(String s) {
+		List<List<BigInteger>> r = new ArrayList<List<BigInteger>>();
+		String[] args = s.split("#");
+		for (int i = 0; i < args.length; ++i) {
+			r.add(toBigIntegerList(args[i]));
 		}
 		return r;
 	}
@@ -423,7 +439,19 @@ public class ArrayArrayClient {
 		List<Boolean> r = new ArrayList<Boolean>();
 		String[] args = s.split("\\|");
 		for (int i = 0; i < args.length; ++i) {
+			if(args[i].trim().equals("") ) {
+				continue;
+			}
 			r.add(Boolean.parseBoolean(args[i]));
+		}
+		return r;
+	}
+	
+	public static List<List<Boolean>> toBoolListList(String s) {
+		List<List<Boolean>> r = new ArrayList<List<Boolean>>();
+		String[] args = s.split("#");
+		for (int i = 0; i < args.length; ++i) {
+			r.add(toBoolList(args[i]));
 		}
 		return r;
 	}
@@ -457,6 +485,9 @@ public class ArrayArrayClient {
 		String[] args = s.split("\\|");
 		List<String> r = new ArrayList<String>();
 		for (int i = 0; i < args.length; ++i) {
+			if(args[i].trim().equals("") ) {
+				continue;
+			}
 			r.add(args[i]);
 		}
 		return r;
@@ -470,10 +501,24 @@ public class ArrayArrayClient {
 		return r;
 	}
 	
+	
+	public static List<List<String>> toStringListList(String s) {
+		List<List<String>> r = new ArrayList<List<String>>();
+		String[] args = s.split("#");
+		for (int i = 0; i < args.length; ++i) {
+			r.add(toStringList(args[i]));
+		}
+		return r;
+	}
+	
 	public static List<byte[]> toBSList(String s) {
 		String[] args = s.split("\\|");
 		List<byte[]> r = new ArrayList<byte[]>();
+		
 		for (int i = 0; i < args.length; ++i) {
+			if(args[i].trim().equals("") ) {
+				continue;
+			}
 			r.add(args[i].getBytes());
 		}
 		return r;
@@ -486,7 +531,28 @@ public class ArrayArrayClient {
 		}
 		return r;
 	}
-
+	
+	public static List<List<byte[]>> toBSListList(String s) {
+		List<List<byte[]>> r = new ArrayList<List<byte[]>>();
+		String[] args = s.split("#");
+		for (int i = 0; i < args.length; ++i) {
+			r.add(toBSList(args[i]));
+		}
+		return r;
+	}
+	
+	public static List<List<String>> toStringListList(List<List<byte[]>> l) {
+		List<List<String>> r = new ArrayList<List<String>>();
+		for(int i = 0;i<l.size();++i) {
+			List<String> rl = new ArrayList<String>();
+			for(int j=0;j<l.get(i).size();++j) {
+				rl.add(new String(l.get(i).get(j)));
+			}
+			r.add(rl);
+		}
+		
+		return r;
+	}
 
 	public static void main(String[] args) throws Exception {
 
@@ -548,7 +614,7 @@ public class ArrayArrayClient {
 			if (args.length < 2) {
 				Usage();
 			}
-			// client.set(toBigIntegerList(args[1]), toBigIntegerList(args[2]), toBoolList(args[3]), toStringList(args[4]), toBSList(args[5]), toStringList(args[6]), toBSList(args[7]));
+			client.set(toBigIntegerListList(args[1]), toBigIntegerListList(args[2]), toBoolListList(args[3]), toStringListList(args[4]), toBSListList(args[5]), toStringListList(args[6]), toBSListList(args[7]));
 			break;
 		default: {
 			Usage();
