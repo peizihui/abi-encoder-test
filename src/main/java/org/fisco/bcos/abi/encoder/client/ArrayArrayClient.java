@@ -375,6 +375,7 @@ public class ArrayArrayClient {
 				System.out.printf(" [ EchoArrayArray ][ set ] event empty. \n");
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.printf(" [ EchoArrayArray ][ set ] failed, error message is %s\n", e.getMessage());
 		}
 	}
@@ -399,7 +400,7 @@ public class ArrayArrayClient {
 		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setBS32 01234567890123456789012345678901|01234567890123456789012345678901 01234567890123456789012345678901 01234567890123456789012345678901|01234567890123456789012345678901|01234567890123456789012345678901|01234567890123456789012345678901");
 		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setString aaaaa|dddddd bbbbbb jlkaldsjfkld|d|ddffddd|dhkjlkjl");
 		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setBS aaaaa|dddddd bbbbbb jlkaldsjfkld|d|ddffddd|dhkjlkjl");
-		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient set 0#1|2|3#-1|2|-4##1 true|false|true#true#false|false 0x0|0x1|0x2#0x9|0c1|0c9#0x9|0x8 01234567890123456789012345678901#01234567890123456789012345678901#01234567890123456789012345678901  aaafd|bbbdfsa|cfascc#aaafa#bbbafd##ccafc#dfljafk|fdjkjkl|fdsjlj aaa|bbb|ccc#aaa#bbb#ccc#dfljk|fdjkjkl|fdsjlj");
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient set 0#1|2|3#-1|2|-4##1 0#111|233|3##-1|2|-4#999|000#1 true|false|true#true#false|false 0x0|0x1|0x2#0x9|0x1|0x9#0x9|0x8 01234567890123456789012345678901#01234567890123456789012345678901#01234567890123456789012345678901  aaafd|bbbdfsa|cfascc#aaafa#bbbafd##ccafc#dfljafk|fdjkjkl|fdsjlj aaa|bbb|ccc#aaa#bbb#ccc#dfljk|fdjkjkl|fdsjlj");
 		System.exit(0);
 	}
 	
