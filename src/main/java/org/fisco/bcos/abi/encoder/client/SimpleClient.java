@@ -231,7 +231,7 @@ public class SimpleClient {
 
 				System.out.printf(
 						" [ EchoSimple ][ setBS32 ] success => event : %s , getBS32 result : %s \n",
-						new String(response.get(0).b), new String(result.toString()));
+						new String(response.get(0).b), new String(result));
 
 			} else {
 				System.out.printf(" [ EchoSimple ][ setBS32 ] event empty. \n");
