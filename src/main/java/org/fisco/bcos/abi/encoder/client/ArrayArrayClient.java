@@ -393,14 +393,14 @@ public class ArrayArrayClient {
 		System.out.println("\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient set [ BigInteger ..., BigInteger ..., Boolean ..., String ..., byte[] ..., String ..., byte[]... ]");
 		
 		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient deploy");
-		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setUint 1|1|2  2|2|2 ");
-		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setInt -1|-2|3 4|5");
-		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setBool false|false|true true false|true" );
-		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setAddr 0x0|0x1 0x0 0x0|0x1|0x3 ");
-		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setBS32 01234567890123456789012345678901|01234567890123456789012345678901 01234567890123456789012345678901 01234567890123456789012345678901|01234567890123456789012345678901|01234567890123456789012345678901|01234567890123456789012345678901");
-		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setString aaaaa|dddddd bbbbbb jlkaldsjfkld|d|ddffddd|dhkjlkjl");
-		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setBS aaaaa|dddddd bbbbbb jlkaldsjfkld|d|ddffddd|dhkjlkjl");
-		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient set 0#1|2|3#1|2|4##1 0#111|233|3##-1|2|-4#999|000#1 true|false|true#true#false|false 0x0|0x1|0x2#0x9|0x1|0x9#0x9|0x8 01234567890123456789012345678901#01234567890123456789012345678901#01234567890123456789012345678901  aaafd|bbbdfsa|cfascc#aaafa#bbbafd##ccafc#dfljafk|fdjkjkl|fdsjlj aaa|bbb|ccc#aaa#bbb#ccc#dfljk|fdjkjkl|fdsjlj");
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setUint \"1|1|2\"  \"2|2|2\" ");
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setInt \"-1|-2|3\" \"4|5\"");
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setBool \"false|false|true\" \"true\" \"false|true\"" );
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setAddr \"0x0|0x1\" \"0x0\" \"0x0|0x1|0x3\" ");
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setBS32 \"01234567890123456789012345678901|01234567890123456789012345678901\" \"01234567890123456789012345678901\" \"01234567890123456789012345678901|01234567890123456789012345678901|01234567890123456789012345678901|01234567890123456789012345678901\"");
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setString \"aaaaa|dddddd\" \"bbbbbb\" \"jlkaldsjfkld|d|ddffddd|dhkjlkjl\"");
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient setBS \"aaaaa|dddddd\" \"bbbbbb\" \"jlkaldsjfkld|d|ddffddd|dhkjlkjl\"");
+		System.out.println("\t\t java -cp conf/:lib/*:apps/* org.fisco.bcos.abi.encoder.client.ArrayArrayClient set \"0#1|2|3#1|2|4#1\" \"0#111|233|3#-1|2|-4#999|000#1\" \"true|false|true#true#false|false\" \"0x0|0x1|0x2#0x9|0x1|0x9#0x9|0x8\" \"01234567890123456789012345678901#01234567890123456789012345678901#01234567890123456789012345678901\"  \"aaafd|bbbdfsa|cfascc#aaafa#bbbafd##ccafc#dfljafk|fdjkjkl|fdsjlj\" \"aaa|bbb|ccc#aaa#bbb#ccc#dfljk|fdjkjkl|fdsjlj\"");
 		System.exit(0);
 	}
 	
@@ -492,9 +492,6 @@ public class ArrayArrayClient {
 		String[] args = s.split("\\|");
 		List<String> r = new ArrayList<String>();
 		for (int i = 0; i < args.length; ++i) {
-			if(args[i].trim().equals("") ) {
-				continue;
-			}
 			r.add(args[i]);
 		}
 		return r;
@@ -526,9 +523,6 @@ public class ArrayArrayClient {
 		List<byte[]> r = new ArrayList<byte[]>();
 		
 		for (int i = 0; i < args.length; ++i) {
-			if(args[i].trim().equals("") ) {
-				continue;
-			}
 			r.add(args[i].getBytes());
 		}
 		return r;
@@ -609,7 +603,7 @@ public class ArrayArrayClient {
 			if (args.length < 2) {
 				Usage();
 			}
-			client.setAddr(toStringList(Arrays.copyOfRange(args, 1, args.length)));
+			client.setString(toStringList(Arrays.copyOfRange(args, 1, args.length)));
 			break;
 		case "setBS":
 			if (args.length < 2) {
@@ -621,7 +615,7 @@ public class ArrayArrayClient {
 			if (args.length < 2) {
 				Usage();
 			}
-			client.setBS(toBSList(Arrays.copyOfRange(args, 1, args.length)));
+			client.setBS32(toBSList(Arrays.copyOfRange(args, 1, args.length)));
 			break;
 		case "set":
 			if (args.length < 2) {
